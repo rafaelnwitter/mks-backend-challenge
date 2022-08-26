@@ -1,11 +1,16 @@
-FROM node:16.17.0-alpine As development
+FROM node:16.17.0-alpine
 
-WORKDIR /usr/src/app
+# Docker working directory
+WORKDIR /app
 
-COPY --chown=node:node package*.json ./
+# Copying file into APP directory of docker
+COPY ./package.json /app/
 
-RUN npm ci
+# Then install the NPM module
+RUN npm install --verbose
 
-COPY --chown=node:node . .
+# Copy current directory to APP folder
+COPY . /app/
 
-USER node
+EXPOSE 4000
+CMD ["npm", "run", "start:dev"]
