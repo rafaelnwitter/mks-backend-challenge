@@ -1,3 +1,4 @@
+version: '3'
 services:
   redis-server:
       image: redis
@@ -61,21 +62,37 @@ services:
       context: ./mks-api
       dockerfile: ./Dockerfile
     image: rafaelnwitter/mks-api:latest
-    volumes: 
-        - ./mks-api:/app
-        - /app/node_modules
-    env_file:
-      - .env
+    environment: 
+        - DB_TYPE=${DB_TYPE}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_HOST=${POSTGRES_HOST}
+        - POSTGRES_USER=${DATABASE_USER}
+        - POSTGRES_PASS=${DATABASE_PASSWORD}
+        - POSTGRES_ADMIN_DB=${ADMIN_DB_NAME}
+        - POSTGRES_SYNC=false
+        - POSTGRES_PORT=${POSTGRES_PORT}
+        - APP_PORT=4000
+        - JWT_ADMIN_ACCESS_TOKEN_EXPIRATION_TIME=${JWT_ADMIN_ACCESS_TOKEN_EXPIRATION_TIME}
+        - JWT_ADMIN_ACCESS_TOKEN_SECRET=${JWT_ADMIN_ACCESS_TOKEN_SECRET}
+        - JWT_ADMIN_REFRESH_TOKEN_SECRET=${JWT_ADMIN_REFRESH_TOKEN_SECRET}
+        - JWT_ADMIN_REFRESH_TOKEN_EXPIRATION_TIME=${JWT_ADMIN_REFRESH_TOKEN_EXPIRATION_TIME}
+        - REDIS_HOST=redis-server
+        - REDIS_PORT=6379
     ports:
       - 4000:4000
+    container_name: mks-api-app
     depends_on: 
       - db
       # - redis-server
-
+    volumes: 
+        - ./mks-api:/app
+        - /app/node_modules
+    # networks: 
+      #   - redis-net
 
 # networks: 
 #   redis-net: null
 volumes:
   pgdata:
-  pgadmin-data:
   redis-data:
