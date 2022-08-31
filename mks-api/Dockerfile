@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ./package.json /app/
 
 # Then install the NPM module
-RUN npm install --verbose
+RUN npm install 
 
 # Copy current directory to APP folder
 COPY . /app/
