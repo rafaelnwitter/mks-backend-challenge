@@ -20,16 +20,19 @@ export class MovieController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthenticationGuard)
   findOne(@Param('id') id: string) {
     return this.movieService.getMovieById(+id);
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthenticationGuard)
   update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
     return this.movieService.update(+id, updateMovieDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthenticationGuard)
   remove(@Param('id') id: string) {
     return this.movieService.remove(+id);
   }
