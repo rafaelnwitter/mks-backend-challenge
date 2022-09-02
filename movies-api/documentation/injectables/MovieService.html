@@ -48,6 +48,9 @@
             <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
         </li>
         <li >
+            <a href="#readme" role="tab" id="readme-tab" data-toggle="tab" data-link="readme">README</a>
+        </li>
+        <li >
             <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
         </li>
 </ul>
@@ -364,8 +367,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/movie/movie.service.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">src/movie/movie.service.ts:41</a></div>
                 </td>
             </tr>
 
@@ -500,6 +503,12 @@
 
     </div>
 
+    <div class="tab-pane fade " id="c-readme">
+        <p><h1 id="movieservice">MovieService</h1>
+<p>This repository is responsable to create, read, update and delete movies</p>
+<p>A Movie contains: name, gender and director</p>
+</p>
+    </div>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
@@ -513,12 +522,12 @@ import Movie from &#x27;./entities/movie.entity&#x27;;
 export class MovieService {
   constructor(
     @InjectRepository(Movie)
-    private movieRepository: Repository&lt;Movie&gt;
+    private movieRepository: Repository&lt;Movie&gt;,
   ) {}
 
   async createMovie(movie: CreateMovieDto) {
     const newMovie &#x3D; await this.movieRepository.create(movie);
-    await this.movieRepository.save(newMovie)
+    await this.movieRepository.save(newMovie);
     return newMovie;
   }
 
@@ -527,7 +536,7 @@ export class MovieService {
   }
 
   async getMovieById(id: number) {
-    const movie &#x3D; await this.movieRepository.findOneBy({id});
+    const movie &#x3D; await this.movieRepository.findOneBy({ id });
     if (movie) {
       return movie;
     }
@@ -536,14 +545,16 @@ export class MovieService {
 
   async update(id: number, movie: UpdateMovieDto) {
     await this.movieRepository.update(id, movie);
-    const updatedMovie &#x3D; await this.movieRepository.findOneByOrFail({id});
-    if (updatedMovie) { return updatedMovie }
+    const updatedMovie &#x3D; await this.movieRepository.findOneByOrFail({ id });
+    if (updatedMovie) {
+      return updatedMovie;
+    }
   }
 
   async remove(id: number) {
     const deleteResponse &#x3D; await this.movieRepository.delete(id);
     if (!deleteResponse.affected) {
-    throw new HttpException(&#x27;Movie not found&#x27;, HttpStatus.NOT_FOUND);
+      throw new HttpException(&#x27;Movie not found&#x27;, HttpStatus.NOT_FOUND);
     }
   }
 }
