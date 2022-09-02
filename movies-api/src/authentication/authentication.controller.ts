@@ -1,31 +1,53 @@
-import { Body, Req, Controller, HttpCode, Post, UseGuards, Response, Res, Get, CACHE_MANAGER, Inject } from '@nestjs/common';
+import {
+  Body,
+  Req,
+  ClassSerializerInterceptor,
+  Controller,
+  HttpCode,
+  Post,
+  UseGuards,
+  Get,
+  CACHE_MANAGER,
+  Inject,
+  SerializeOptions,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dto/register.dto';
-import RequestWithUser from './requestWithUser.interface';
-import { LocalAuthenticationGuard } from './localAuthentication.guard';
-import JwtAuthenticationGuard from './jwt-authentication.guard';
+import RequestWithUser from './interface/requestWithUser.interface';
+import { LocalAuthenticationGuard } from './guards/localAuthentication.guard';
+import JwtAuthenticationGuard from './guards/jwt-authentication.guard';
 import { ApiBody } from '@nestjs/swagger';
 import LogInDto from './dto/login.dto';
 import { UsersService } from '../users/users.service';
-import Cache from 'cache-manager-redis-store'
-var cookies = require('cookie');
-
-
+import Cache from 'cache-manager-redis-store';
+import JwtRefreshGuard from './guards/jwt-refresh.guard';
 
 @Controller('authentication')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthenticationController {
- /**
-  * @ignore
-  */
+  /**
+   * @ignore
+   */
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) { }
+  ) {}
 
   @Post('register')
   async register(@Body() registrationData: RegisterDto) {
     return this.authenticationService.register(registrationData);
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Get('refresh')
+  refresh(@Req() request: RequestWithUser) {
+    const accessTokenCookie =
+      this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
+
+    request.res.setHeader('Set-Cookie', accessTokenCookie);
+    return request.user;
   }
 
   @HttpCode(200)
@@ -34,13 +56,10 @@ export class AuthenticationController {
   @ApiBody({ type: LogInDto })
   async logIn(@Req() request: RequestWithUser) {
     const { user } = request;
-    const accessTokenCookie = this.authenticationService.getCookieWithJwtAccessToken(
-      user.id,
-    );
-    const {
-      cookie: refreshTokenCookie,
-      token: refreshToken,
-    } = this.authenticationService.getCookieWithJwtRefreshToken(user.id);
+    const accessTokenCookie =
+      this.authenticationService.getCookieWithJwtAccessToken(user.id);
+    const { cookie: refreshTokenCookie, token: refreshToken } =
+      this.authenticationService.getCookieWithJwtRefreshToken(user.id);
 
     await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
 
