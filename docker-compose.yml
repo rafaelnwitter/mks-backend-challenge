@@ -1,0 +1,75 @@
+version: "3"
+services:
+  backend-api:
+    build:
+      context: ./movies-api
+      dockerfile: ./Dockerfile
+    image: rafaelnwitter/backend-api:latest
+    ports:
+      - "3000:3000"
+    container_name: backend-api
+    links:
+      - redis
+    environment:
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: movies
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+    depends_on: 
+      - postgres
+      - redis
+    volumes: 
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    networks: 
+      - postgres
+
+  redis:
+    image: redis:alpine
+    container_name: cache
+    networks:
+      - postgres
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    networks:
+      - postgres
+    ports:
+    - "5432:5432"
+    env_file:
+    - docker.env
+    volumes:
+    - /data/postgres:/data/postgres
+ 
+  pgadmin:
+    links:
+    - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+    - "8080:80"
+    volumes:
+    - /data/pgadmin:/postgres/.pgadmin
+    env_file:
+    - docker.env
+    networks:
+    - postgres
+
+volumes:
+  db:
+    driver: local
+  redis:
+    driver: local
+
+networks:
+  postgres:
+    driver: bridge
