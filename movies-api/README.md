@@ -3,6 +3,8 @@
 <p align="top"><a href="https://rafaelnwitter.github.io/mks-backend-challenge/movies-api/documentation/index.html" target="blank"><img src="https://pic.onlinewebfonts.com/svg/img_285272.png" width="50"/> Check project estructure </a></p>  </p>
 </br>
   <p align="center">NestJS is a progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  
+ [Checck API details here after starting project](http://localhost:3000/api)
 
 ## Description
 
