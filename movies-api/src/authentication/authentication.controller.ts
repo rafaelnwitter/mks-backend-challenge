@@ -14,6 +14,9 @@ var cookies = require('cookie');
 
 @Controller('authentication')
 export class AuthenticationController {
+ /**
+  * @ignore
+  */
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
