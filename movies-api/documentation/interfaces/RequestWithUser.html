@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authentication/requestWithUser.interface.ts</code>
+            <code>src/authentication/interface/requestWithUser.interface.ts</code>
         </p>
 
 
@@ -145,12 +145,12 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Request } from &#x27;express&#x27;;
-import User from &#x27;../users/entities/user.entity&#x27;;
- 
+import User from &#x27;../../users/entities/user.entity&#x27;;
+
 interface RequestWithUser extends Request {
   user: User;
 }
- 
+
 export default RequestWithUser;
 </code></pre>
     </div>

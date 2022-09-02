@@ -40,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li >LocalAuthenticationGuard</li>
+  <li >JwtRefreshGuard</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,7 +58,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authentication/guards/localAuthentication.guard.ts</code>
+            <code>src/authentication/guards/jwt-refresh.guard.ts</code>
         </p>
 
 
@@ -77,7 +77,7 @@
 import { AuthGuard } from &#x27;@nestjs/passport&#x27;;
 
 @Injectable()
-export class LocalAuthenticationGuard extends AuthGuard(&#x27;local&#x27;) {}
+export default class JwtRefreshGuard extends AuthGuard(&#x27;jwt-refresh-token&#x27;) {}
 </code></pre>
     </div>
 
@@ -121,7 +121,7 @@ export class LocalAuthenticationGuard extends AuthGuard(&#x27;local&#x27;) {}
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'LocalAuthenticationGuard.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'JwtRefreshGuard.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

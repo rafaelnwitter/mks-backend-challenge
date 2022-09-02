@@ -132,7 +132,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/authentication/authentication.service.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/authentication/authentication.service.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -305,8 +305,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">src/authentication/authentication.service.ts:93</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="104"
+                            class="link-to-prism">src/authentication/authentication.service.ts:104</a></div>
                 </td>
             </tr>
 
@@ -415,8 +415,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/authentication/authentication.service.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/authentication/authentication.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -486,8 +486,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/authentication/authentication.service.ts:87</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/authentication/authentication.service.ts:96</a></div>
                 </td>
             </tr>
 
@@ -558,8 +558,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">src/authentication/authentication.service.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/authentication/authentication.service.ts:43</a></div>
                 </td>
             </tr>
 
@@ -630,8 +630,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/authentication/authentication.service.ts:77</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/authentication/authentication.service.ts:80</a></div>
                 </td>
             </tr>
 
@@ -697,26 +697,22 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &quot;@nestjs/common&quot;;
-import { UsersService } from &quot;../users/users.service&quot;;
-import RegisterDto from &quot;./dto/register.dto&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
+import { UsersService } from &#x27;../users/users.service&#x27;;
+import RegisterDto from &#x27;./dto/register.dto&#x27;;
 import * as bcrypt from &#x27;bcrypt&#x27;;
-import { ConfigService } from &quot;@nestjs/config&quot;;
-import { JwtService } from &quot;@nestjs/jwt&quot;;
-import { TokenPayload } from &quot;./tokenPayload.interface&quot;;
-import { PostgresErrorCode } from &quot;../database/postgresErrorCodes.enum&quot;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
+import { JwtService } from &#x27;@nestjs/jwt&#x27;;
+import { TokenPayload } from &#x27;./interface/tokenPayload.interface&#x27;;
+import { PostgresErrorCode } from &#x27;../database/postgresErrorCodes.enum&#x27;;
 
 @Injectable()
 export class AuthenticationService {
-  public getCookieWithJwtAccessToken(
-    userId: number,
-  ) {
+  public getCookieWithJwtAccessToken(userId: number) {
     const payload: TokenPayload &#x3D; { userId };
     const token &#x3D; this.jwtService.sign(payload, {
       secret: this.configService.get(&#x27;JWT_SECRET&#x27;),
-      expiresIn: &#x60;${this.configService.get(
-        &#x27;JWT_EXPIRATION_TIME&#x27;,
-      )}s&#x60;,
+      expiresIn: &#x60;${this.configService.get(&#x27;JWT_EXPIRATION_TIME&#x27;)}s&#x60;,
     });
     return &#x60;Authentication&#x3D;${token}; HttpOnly; Path&#x3D;/; Max-Age&#x3D;${this.configService.get(
       &#x27;JWT_EXPIRATION_TIME&#x27;,
@@ -727,9 +723,7 @@ export class AuthenticationService {
     const payload: TokenPayload &#x3D; { userId };
     const token &#x3D; this.jwtService.sign(payload, {
       secret: this.configService.get(&#x27;JWT_SECRET&#x27;),
-      expiresIn: &#x60;${this.configService.get(
-        &#x27;JWT_EXPIRATION_TIME&#x27;,
-      )}s&#x60;,
+      expiresIn: &#x60;${this.configService.get(&#x27;JWT_EXPIRATION_TIME&#x27;)}s&#x60;,
     });
     const cookie &#x3D; &#x60;Refresh&#x3D;${token}; HttpOnly; Path&#x3D;/; Max-Age&#x3D;${this.configService.get(
       &#x27;JWT_REFRESH_TOKEN_EXPIRATION_TIME&#x27;,
@@ -742,23 +736,29 @@ export class AuthenticationService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService
-  ) { }
+    private readonly configService: ConfigService,
+  ) {}
 
   public async register(registrationData: RegisterDto) {
     const hashedPassword &#x3D; await bcrypt.hash(registrationData.password, 10);
     try {
       const createdUser &#x3D; await this.usersService.create({
         ...registrationData,
-        password: hashedPassword
+        password: hashedPassword,
       });
       createdUser.password &#x3D; undefined;
       return createdUser;
     } catch (error) {
       if (error?.code &#x3D;&#x3D;&#x3D; PostgresErrorCode.UniqueViolation) {
-        throw new HttpException(&#x27;User with that email already exists&#x27;, HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          &#x27;User with that email already exists&#x27;,
+          HttpStatus.BAD_REQUEST,
+        );
       }
-      throw new HttpException(&#x27;Something went wrong&#x27;, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        &#x27;Something went wrong&#x27;,
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -769,24 +769,35 @@ export class AuthenticationService {
       user.password &#x3D; undefined;
       return user;
     } catch (error) {
-      throw new HttpException(&#x27;Wrong credentials provided&#x27;, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        &#x27;Wrong credentials provided&#x27;,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
-  private async verifyPassword(plainTextPassword: string, hashedPassword: string) {
+  private async verifyPassword(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ) {
     const isPasswordMatching &#x3D; await bcrypt.compare(
       plainTextPassword,
-      hashedPassword
+      hashedPassword,
     );
     if (!isPasswordMatching) {
-      throw new HttpException(&#x27;Wrong credentials provided&#x27;, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        &#x27;Wrong credentials provided&#x27;,
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
   public getCookieWithJwtToken(userId: number) {
     const payload: TokenPayload &#x3D; { userId };
     const token &#x3D; this.jwtService.sign(payload);
-    return &#x60;Authentication&#x3D;${token}; HttpOnly; Path&#x3D;/; Max-Age&#x3D;${this.configService.get(&#x27;JWT_EXPIRATION_TIME&#x27;)}&#x60;;
+    return &#x60;Authentication&#x3D;${token}; HttpOnly; Path&#x3D;/; Max-Age&#x3D;${this.configService.get(
+      &#x27;JWT_EXPIRATION_TIME&#x27;,
+    )}&#x60;;
   }
 
   public getCookiesForLogOut() {

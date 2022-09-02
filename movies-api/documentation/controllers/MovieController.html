@@ -142,8 +142,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/movie/movie.controller.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="30"
+                            class="link-to-prism">src/movie/movie.controller.ts:30</a></div>
                 </td>
             </tr>
 
@@ -212,14 +212,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@Get()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/movie/movie.controller.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/movie/movie.controller.ts:36</a></div>
                 </td>
             </tr>
 
@@ -256,14 +256,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Get(&#x27;:id&#x27;)<br />@ApiParam({name: &#x27;id&#x27;, required: true, description: &#x27;Should be an id of a post that exists in the database&#x27;, type: Number})<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">src/movie/movie.controller.ts:29</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/movie/movie.controller.ts:50</a></div>
                 </td>
             </tr>
 
@@ -332,14 +332,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/movie/movie.controller.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/movie/movie.controller.ts:66</a></div>
                 </td>
             </tr>
 
@@ -408,14 +408,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Patch(&#x27;:id&#x27;)<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/movie/movie.controller.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">src/movie/movie.controller.ts:58</a></div>
                 </td>
             </tr>
 
@@ -479,14 +479,30 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from &#x27;@nestjs/common&#x27;;
 import { MovieService } from &#x27;./movie.service&#x27;;
 import { CreateMovieDto } from &#x27;./dto/create-movie.dto&#x27;;
 import { UpdateMovieDto } from &#x27;./dto/update-movie.dto&#x27;;
-import JwtAuthenticationGuard from &#x27;../authentication/jwt-authentication.guard&#x27;;
+import JwtAuthenticationGuard from &#x27;../authentication/guards/jwt-authentication.guard&#x27;;
 import Movie from &#x27;./entities/movie.entity&#x27;;
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from &#x27;@nestjs/swagger&#x27;;
 
 @Controller(&#x27;movie&#x27;)
+@ApiTags(&#x27;movies&#x27;)
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
@@ -497,27 +513,36 @@ export class MovieController {
   }
 
   @Get()
+  @UseGuards(JwtAuthenticationGuard)
   findAll() {
     return this.movieService.getAllMovies();
   }
 
-  /*
-  teste
-
-  */  
   @Get(&#x27;:id&#x27;)
+  @ApiParam({
+    name: &#x27;id&#x27;,
+    required: true,
+    description: &#x27;Should be an id of a post that exists in the database&#x27;,
+    type: Number,
+  })
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
   findOne(@Param(&#x27;id&#x27;) id: string): Promise&lt;Movie&gt; {
     return this.movieService.getMovieById(+id);
   }
 
   @Patch(&#x27;:id&#x27;)
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
   update(@Param(&#x27;id&#x27;) id: string, @Body() updateMovieDto: UpdateMovieDto) {
     return this.movieService.update(+id, updateMovieDto);
   }
 
   @Delete(&#x27;:id&#x27;)
+  @ApiOkResponse()
+  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
   remove(@Param(&#x27;id&#x27;) id: string) {
     return this.movieService.remove(+id);

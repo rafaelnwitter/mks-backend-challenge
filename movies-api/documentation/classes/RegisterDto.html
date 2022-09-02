@@ -304,43 +304,43 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-    IsEmail,
-    IsString,
-    IsNotEmpty,
-    MinLength,
-    Matches,
-  } from &#x27;class-validator&#x27;;
-  import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
-  
-  export class RegisterDto {
-    @IsEmail()
-    email: string;
-  
-    @IsString()
-    @IsNotEmpty()
-    name: string;
-  
-    @ApiProperty({
-      deprecated: true,
-      description: &#x27;Use the name property instead&#x27;,
-    })
-    fullName: string;
-  
-    @IsString()
-    @IsNotEmpty()
-    @MinLength(7)
-    password: string;
-  
-    @ApiProperty({
-      description: &#x27;Has to match a regular expression: /^\\+[1-9]\\d{1,14}$/&#x27;,
-      example: &#x27;+123123123123&#x27;,
-    })
-    @IsString()
-    @IsNotEmpty()
-    @Matches(/^\+[1-9]\d{1,14}$/)
-    phoneNumber: string;
+  IsEmail,
+  IsString,
+  IsNotEmpty,
+  MinLength,
+  Matches,
+} from &#x27;class-validator&#x27;;
+import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
+
+export class RegisterDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty({
+    deprecated: true,
+    description: &#x27;Use the name property instead&#x27;,
+  })
+  fullName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(7)
+  password: string;
+
+  @ApiProperty({
+    description: &#x27;Has to match a regular expression: /^\\+[1-9]\\d{1,14}$/&#x27;,
+    example: &#x27;+123123123123&#x27;,
+  })
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/^\+[1-9]\d{1,14}$/)
+  phoneNumber: string;
 }
-  
+
 export default RegisterDto;
 </code></pre>
     </div>

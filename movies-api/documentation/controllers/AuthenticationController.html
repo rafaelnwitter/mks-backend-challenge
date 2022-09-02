@@ -95,6 +95,9 @@
                                 <a href="#logOut" >logOut</a>
                             </li>
                             <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Async</span>
                                 <a href="#register" >register</a>
                             </li>
@@ -142,8 +145,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:75</a></div>
                 </td>
             </tr>
 
@@ -220,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="35"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:35</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:56</a></div>
                 </td>
             </tr>
 
@@ -298,8 +301,84 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:66</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:84</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>request</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh(request: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@UseGuards(JwtRefreshGuard)<br />@Get(&#x27;refresh&#x27;)<br /></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:44</a></div>
                 </td>
             </tr>
 
@@ -376,8 +455,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:38</a></div>
                 </td>
             </tr>
 
@@ -429,34 +508,55 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Req, Controller, HttpCode, Post, UseGuards, Response, Res, Get, CACHE_MANAGER, Inject } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Body,
+  Req,
+  ClassSerializerInterceptor,
+  Controller,
+  HttpCode,
+  Post,
+  UseGuards,
+  Get,
+  CACHE_MANAGER,
+  Inject,
+  UseInterceptors,
+} from &#x27;@nestjs/common&#x27;;
 import { AuthenticationService } from &#x27;./authentication.service&#x27;;
 import RegisterDto from &#x27;./dto/register.dto&#x27;;
-import RequestWithUser from &#x27;./requestWithUser.interface&#x27;;
-import { LocalAuthenticationGuard } from &#x27;./localAuthentication.guard&#x27;;
-import JwtAuthenticationGuard from &#x27;./jwt-authentication.guard&#x27;;
+import RequestWithUser from &#x27;./interface/requestWithUser.interface&#x27;;
+import { LocalAuthenticationGuard } from &#x27;./guards/localAuthentication.guard&#x27;;
+import JwtAuthenticationGuard from &#x27;./guards/jwt-authentication.guard&#x27;;
 import { ApiBody } from &#x27;@nestjs/swagger&#x27;;
 import LogInDto from &#x27;./dto/login.dto&#x27;;
 import { UsersService } from &#x27;../users/users.service&#x27;;
-import Cache from &#x27;cache-manager-redis-store&#x27;
-var cookies &#x3D; require(&#x27;cookie&#x27;);
-
-
+import Cache from &#x27;cache-manager-redis-store&#x27;;
+import JwtRefreshGuard from &#x27;./guards/jwt-refresh.guard&#x27;;
 
 @Controller(&#x27;authentication&#x27;)
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthenticationController {
- /**
-  * @ignore
-  */
+  /**
+   * @ignore
+   */
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
-  ) { }
+  ) {}
 
   @Post(&#x27;register&#x27;)
   async register(@Body() registrationData: RegisterDto) {
     return this.authenticationService.register(registrationData);
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Get(&#x27;refresh&#x27;)
+  refresh(@Req() request: RequestWithUser) {
+    const accessTokenCookie &#x3D;
+      this.authenticationService.getCookieWithJwtAccessToken(request.user.id);
+
+    request.res.setHeader(&#x27;Set-Cookie&#x27;, accessTokenCookie);
+    return request.user;
   }
 
   @HttpCode(200)
@@ -465,13 +565,10 @@ export class AuthenticationController {
   @ApiBody({ type: LogInDto })
   async logIn(@Req() request: RequestWithUser) {
     const { user } &#x3D; request;
-    const accessTokenCookie &#x3D; this.authenticationService.getCookieWithJwtAccessToken(
-      user.id,
-    );
-    const {
-      cookie: refreshTokenCookie,
-      token: refreshToken,
-    } &#x3D; this.authenticationService.getCookieWithJwtRefreshToken(user.id);
+    const accessTokenCookie &#x3D;
+      this.authenticationService.getCookieWithJwtAccessToken(user.id);
+    const { cookie: refreshTokenCookie, token: refreshToken } &#x3D;
+      this.authenticationService.getCookieWithJwtRefreshToken(user.id);
 
     await this.usersService.setCurrentRefreshToken(refreshToken, user.id);
 

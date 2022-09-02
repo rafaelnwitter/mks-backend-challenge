@@ -58,7 +58,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/authentication/jwt.strategy.ts</code>
+            <code>src/authentication/strategy/jwt.strategy.ts</code>
         </p>
 
 
@@ -105,7 +105,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/authentication/jwt.strategy.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/authentication/strategy/jwt.strategy.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -183,7 +183,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/authentication/jwt.strategy.ts:23</a></div>
+                            class="link-to-prism">src/authentication/strategy/jwt.strategy.ts:23</a></div>
                 </td>
             </tr>
 
@@ -242,8 +242,8 @@ import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { ConfigService } from &#x27;@nestjs/config&#x27;;
 import { Request } from &#x27;express&#x27;;
-import { UsersService } from &#x27;../users/users.service&#x27;;
-import { TokenPayload } from &#x27;./tokenPayload.interface&#x27;;
+import { UsersService } from &#x27;../../users/users.service&#x27;;
+import { TokenPayload } from &#x27;../interface/tokenPayload.interface&#x27;;
  
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
