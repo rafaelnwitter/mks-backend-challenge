@@ -7,8 +7,6 @@ import {
   Post,
   UseGuards,
   Get,
-  CACHE_MANAGER,
-  Inject,
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
@@ -19,7 +17,6 @@ import JwtAuthenticationGuard from './guards/jwt-authentication.guard';
 import { ApiBody } from '@nestjs/swagger';
 import LogInDto from './dto/login.dto';
 import { UsersService } from '../users/users.service';
-import Cache from 'cache-manager-redis-store';
 import JwtRefreshGuard from './guards/jwt-refresh.guard';
 
 @Controller('authentication')
@@ -31,7 +28,6 @@ export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   @Post('register')
@@ -53,7 +49,7 @@ export class AuthenticationController {
   @UseGuards(LocalAuthenticationGuard)
   @Post('log-in')
   @ApiBody({ type: LogInDto })
-  async logIn(@Req() request: RequestWithUser): Promisse<HTTP {
+  async logIn(@Req() request: RequestWithUser): Promise<any> {
     const { user } = request;
     const accessTokenCookie =
       this.authenticationService.getCookieWithJwtAccessToken(user.id);
