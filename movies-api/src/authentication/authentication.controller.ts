@@ -9,7 +9,6 @@ import {
   Get,
   CACHE_MANAGER,
   Inject,
-  SerializeOptions,
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';

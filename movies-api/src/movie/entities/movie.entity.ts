@@ -1,8 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Movie {
@@ -17,7 +13,6 @@ class Movie {
 
   @Column()
   public director: string;
-
 }
 
 export default Movie;
