@@ -7,20 +7,19 @@ import { LocalStrategy } from './strategy/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategy/jwt.strategy';
-import * as redisStore from 'cache-manager-redis-store'
+import * as redisStore from 'cache-manager-redis-store';
 
- 
 @Module({
   imports: [
     CacheModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-        useFactory: (configService: ConfigService) => ({
-          store: redisStore,
-          host: configService.get('REDIS_HOST'),
-          port: configService.get('REDIS_PORT'),
-          ttl: 120
-        }),
+      useFactory: (configService: ConfigService) => ({
+        store: redisStore,
+        host: configService.get('REDIS_HOST'),
+        port: configService.get('REDIS_PORT'),
+        ttl: 120,
+      }),
     }),
     UsersModule,
     PassportModule,
@@ -37,6 +36,6 @@ import * as redisStore from 'cache-manager-redis-store'
     }),
   ],
   providers: [AuthenticationService, LocalStrategy, JwtStrategy],
-  controllers: [AuthenticationController]
+  controllers: [AuthenticationController],
 })
 export class AuthenticationModule {}

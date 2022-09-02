@@ -1,5 +1,5 @@
 import * as Joi from '@hapi/joi';
-import * as redisStore from 'cache-manager-redis-store'
+import * as redisStore from 'cache-manager-redis-store';
 import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './movie/movie.module';
@@ -21,12 +21,12 @@ import { AuthenticationModule } from './authentication/authentication.module';
         PORT: Joi.number(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION_TIME: Joi.string().required(),
-      })
+      }),
     }),
     DatabaseModule,
-    UsersModule,    
-    MovieModule, 
-    AuthenticationModule
+    UsersModule,
+    MovieModule,
+    AuthenticationModule,
   ],
   controllers: [],
   providers: [],

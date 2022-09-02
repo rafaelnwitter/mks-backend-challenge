@@ -3,7 +3,7 @@ services:
   backend-api:
     build:
       context: ./movies-api
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     image: rafaelnwitter/backend-api:latest
     ports:
       - "3000:3000"
@@ -23,8 +23,8 @@ services:
       - postgres
       - redis
     volumes: 
-      - ./movies-api:/usr/src/app/
-      - /usr/src/app/node_modules
+      - ./movies-api:/app
+      - /app/node_modules
     networks: 
       - postgres
 
