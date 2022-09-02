@@ -9,12 +9,12 @@ import Movie from './entities/movie.entity';
 export class MovieService {
   constructor(
     @InjectRepository(Movie)
-    private movieRepository: Repository<Movie>
+    private movieRepository: Repository<Movie>,
   ) {}
 
   async createMovie(movie: CreateMovieDto) {
     const newMovie = await this.movieRepository.create(movie);
-    await this.movieRepository.save(newMovie)
+    await this.movieRepository.save(newMovie);
     return newMovie;
   }
 
@@ -23,7 +23,7 @@ export class MovieService {
   }
 
   async getMovieById(id: number) {
-    const movie = await this.movieRepository.findOneBy({id});
+    const movie = await this.movieRepository.findOneBy({ id });
     if (movie) {
       return movie;
     }
@@ -32,14 +32,16 @@ export class MovieService {
 
   async update(id: number, movie: UpdateMovieDto) {
     await this.movieRepository.update(id, movie);
-    const updatedMovie = await this.movieRepository.findOneByOrFail({id});
-    if (updatedMovie) { return updatedMovie }
+    const updatedMovie = await this.movieRepository.findOneByOrFail({ id });
+    if (updatedMovie) {
+      return updatedMovie;
+    }
   }
 
   async remove(id: number) {
     const deleteResponse = await this.movieRepository.delete(id);
     if (!deleteResponse.affected) {
-    throw new HttpException('Movie not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Movie not found', HttpStatus.NOT_FOUND);
     }
   }
 }
