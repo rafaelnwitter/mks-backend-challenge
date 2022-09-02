@@ -53,7 +53,7 @@ export class AuthenticationController {
   @UseGuards(LocalAuthenticationGuard)
   @Post('log-in')
   @ApiBody({ type: LogInDto })
-  async logIn(@Req() request: RequestWithUser) {
+  async logIn(@Req() request: RequestWithUser): Promisse<HTTP {
     const { user } = request;
     const accessTokenCookie =
       this.authenticationService.getCookieWithJwtAccessToken(user.id);

@@ -1,16 +1,16 @@
 FROM node:16.17.0-alpine
 
 # Docker working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copying file into APP directory of docker
-COPY package*.json /usr/src/app/
+COPY ./package.json /app/
 
 # Then install the NPM module
 RUN npm install 
 
 # Copy current directory to APP folder
-COPY . /usr/src/app/
+COPY . /app/
 
 EXPOSE 3000
 CMD ["npm", "run", "start:dev"]

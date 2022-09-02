@@ -1,25 +1,25 @@
 <p align="left">
-  <a href="https://www.linkedin.com/in/rafaelnwitt/" target="blank"><img src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-linkedin-3.png" width="30"/>  My LinkedIn Profile</a>
-</p>
-
+  <a href="https://www.linkedin.com/in/rafaelnwitt/" target="blank"><img src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-linkedin-3.png" width="50"/> My LinkedIn Profile</a>
+<p align="top"><a href="https://rafaelnwitter.github.io/mks-backend-challenge/movies-api/documentation/index.html" target="blank"><img src="https://pic.onlinewebfonts.com/svg/img_285272.png" width="50"/> Check project estructure </a></p>  </p>
+</br>
   <p align="center">NestJS is a progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
 
 ## Description
 
-### This repository is created to solve the backend problem to MKS Developer,
-#### Using Techs like:
+This repository is created to solve the backend problem to MKS Developer,
+Using Techs like:
 
- - TypeScript
- - TypeORM
- - SWAGGER
-- POSTGRESQL
-- PGADMIN
-- DOCKER
-- DOCKER-COMPOSE
-- REDIS
-- Express Framework
-- NestJS
-- Azure Deploy
+	TypeScript
+	TypeORM
+	SWAGGER
+	POSTGRESQL
+	PGADMIN
+	DOCKER
+	DOCKER-COMPOSE
+	REDIS
+	Express Framework
+	NestJS
+	Azure Deploy
 
 ## Docker Installion (RECOMMENDED)
 ##### If you do not have Docker neither docker-compose you can follow this steps:
