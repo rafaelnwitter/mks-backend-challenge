@@ -3,6 +3,7 @@ import { MovieService } from './movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import JwtAuthenticationGuard from '../authentication/jwt-authentication.guard';
+import Movie from './entities/movie.entity';
 
 @Controller('movie')
 export class MovieController {
@@ -19,9 +20,13 @@ export class MovieController {
     return this.movieService.getAllMovies();
   }
 
+  /*
+  teste
+
+  */  
   @Get(':id')
   @UseGuards(JwtAuthenticationGuard)
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<Movie> {
     return this.movieService.getMovieById(+id);
   }
 
