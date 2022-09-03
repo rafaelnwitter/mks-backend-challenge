@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/movie/entities/movie.entity.ts</code>
+            <code>src/movie/movie.entity.ts</code>
         </p>
 
 
@@ -75,20 +75,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#director" >director</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#gender" >gender</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#id" >id</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#publisher" >publisher</a>
+                            </li>
+                            <li>
+                                <a href="#publisherId" >publisherId</a>
                             </li>
                         </ul>
                     </td>
@@ -112,45 +111,8 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="director"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>director</b></span>
-                        <a href="#director"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @Column()<br />
-                        </code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/movie/entities/movie.entity.ts:15</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="gender"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>gender</b></span>
                         <a href="#gender"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -173,7 +135,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/movie/entities/movie.entity.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/movie/movie.entity.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -186,7 +148,6 @@
                 <td class="col-md-4">
                     <a name="id"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>id</b></span>
                         <a href="#id"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -209,7 +170,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/movie/entities/movie.entity.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/movie/movie.entity.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -222,7 +183,6 @@
                 <td class="col-md-4">
                     <a name="name"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>name</b></span>
                         <a href="#name"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -245,7 +205,77 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/movie/entities/movie.entity.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/movie/movie.entity.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publisher"></a>
+                    <span class="name">
+                        <span ><b>publisher</b></span>
+                        <a href="#publisher"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../entitys/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Index(&#x27;post_authorId_index&#x27;)<br />@ManyToOne(undefined, publisher &#x3D;&gt; publisher.movies)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/movie/movie.entity.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="publisherId"></a>
+                    <span class="name">
+                        <span ><b>publisherId</b></span>
+                        <a href="#publisherId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @RelationId(movie &#x3D;&gt; movie.publisher)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/movie/movie.entity.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -257,21 +287,33 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Column, Entity, PrimaryGeneratedColumn } from &#x27;typeorm&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Index,
+  ManyToOne,
+  RelationId,
+} from &#x27;typeorm&#x27;;
+import { User } from &#x27;../users/entities/user.entity&#x27;;
 
 @Entity()
-export default class Movie {
+export class Movie {
   @PrimaryGeneratedColumn()
-  public id: number;
+  id: number;
 
   @Column()
-  public name: string;
+  name: string;
 
   @Column()
-  public gender: string;
+  gender: string;
 
-  @Column()
-  public director: string;
+  @Index(&#x27;post_authorId_index&#x27;)
+  @ManyToOne(() &#x3D;&gt; User, (publisher: User) &#x3D;&gt; publisher.movies)
+  publisher: User;
+
+  @RelationId((movie: Movie) &#x3D;&gt; movie.publisher)
+  publisherId: number;
 }
 </code></pre>
     </div>

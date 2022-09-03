@@ -198,7 +198,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as redisStore from &#x27;cache-manager-redis-store&#x27;;
+import { CacheModule, Module } from &#x27;@nestjs/common&#x27;;
 import { AuthenticationService } from &#x27;./authentication.service&#x27;;
 import { UsersModule } from &#x27;../users/users.module&#x27;;
 import { AuthenticationController } from &#x27;./authentication.controller&#x27;;
@@ -210,6 +211,16 @@ import { JwtStrategy } from &#x27;./strategy/jwt.strategy&#x27;;
 
 @Module({
   imports: [
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) &#x3D;&gt; ({
+        store: redisStore,
+        host: configService.get(&#x27;REDIS_HOST&#x27;),
+        port: configService.get(&#x27;REDIS_PORT&#x27;),
+        ttl: 120,
+      }),
+    }),
     UsersModule,
     PassportModule,
     ConfigModule,

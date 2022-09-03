@@ -84,19 +84,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#create" >create</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#createMovie" >createMovie</a>
                             </li>
                             <li>
-                                <a href="#findAll" >findAll</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteMovie" >deleteMovie</a>
                             </li>
                             <li>
-                                <a href="#findOne" >findOne</a>
+                                <a href="#getMovieById" >getMovieById</a>
                             </li>
                             <li>
-                                <a href="#remove" >remove</a>
-                            </li>
-                            <li>
-                                <a href="#update" >update</a>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateMovie" >updateMovie</a>
                             </li>
                         </ul>
                     </td>
@@ -119,16 +119,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="createMovie"></a>
                     <span class="name">
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>createMovie</b></span>
+                        <a href="#createMovie"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createMovieDto: <a href="../classes/CreateMovieDto.html" target="_self">CreateMovieDto</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createMovie(post: <a href="../classes/CreateMovieDto.html" target="_self">CreateMovieDto</a>, req: <a href="../interfaces/RequestWithUser.html" target="_self">RequestWithUser</a>)</code>
                 </td>
             </tr>
 
@@ -142,8 +144,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="30"
-                            class="link-to-prism">src/movie/movie.controller.ts:30</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/movie/movie.controller.ts:53</a></div>
                 </td>
             </tr>
 
@@ -164,9 +166,21 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>createMovieDto</td>
+                                    <td>post</td>
                                     <td>
                                                 <code><a href="../classes/CreateMovieDto.html" target="_self" >CreateMovieDto</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                                <code><a href="../interfaces/RequestWithUser.html" target="_self" >RequestWithUser</a></code>
                                     </td>
 
                                     <td>
@@ -181,7 +195,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
@@ -195,16 +209,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="findAll"></a>
+                    <a name="deleteMovie"></a>
                     <span class="name">
-                        <span ><b>findAll</b></span>
-                        <a href="#findAll"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>deleteMovie</b></span>
+                        <a href="#deleteMovie"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findAll()</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteMovie(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -212,14 +228,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Delete(&#x27;:id&#x27;)<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">src/movie/movie.controller.ts:36</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/movie/movie.controller.ts:65</a></div>
                 </td>
             </tr>
 
@@ -228,8 +244,40 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -239,16 +287,16 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="findOne"></a>
+                    <a name="getMovieById"></a>
                     <span class="name">
-                        <span ><b>findOne</b></span>
-                        <a href="#findOne"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getMovieById</b></span>
+                        <a href="#getMovieById"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>getMovieById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -256,14 +304,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br />@ApiParam({name: &#x27;id&#x27;, required: true, description: &#x27;Should be an id of a post that exists in the database&#x27;, type: Number})<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Get(&#x27;:id&#x27;)<br />@ApiParam({name: &#x27;id&#x27;, required: true, description: &#x27;Should be an id of a post that exists in the database&#x27;, type: Number})<br />@ApiResponse({status: 200, description: &#x27;A post has been successfully fetched&#x27;, type: Movie})<br />@ApiResponse({status: 404, description: &#x27;A post with given id does not exist.&#x27;})<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/movie/movie.controller.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/movie/movie.controller.ts:46</a></div>
                 </td>
             </tr>
 
@@ -315,16 +363,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="remove"></a>
+                    <a name="updateMovie"></a>
                     <span class="name">
-                        <span ><b>remove</b></span>
-                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                        <span class="modifier">Async</span>
+                        <span ><b>updateMovie</b></span>
+                        <a href="#updateMovie"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateMovie(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, movie: <a href="../classes/UpdateMovieDto.html" target="_self">UpdateMovieDto</a>)</code>
                 </td>
             </tr>
 
@@ -332,90 +382,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
+                    <code>@Patch(&#x27;:id&#x27;)<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="66"
-                            class="link-to-prism">src/movie/movie.controller.ts:66</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>id</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="update"></a>
-                    <span class="name">
-                        <span ><b>update</b></span>
-                        <a href="#update"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateMovieDto: <a href="../classes/UpdateMovieDto.html" target="_self">UpdateMovieDto</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br />@ApiOkResponse()<br />@ApiNotFoundResponse()<br />@UseGuards(JwtAuthenticationGuard)<br /></code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/movie/movie.controller.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/movie/movie.controller.ts:59</a></div>
                 </td>
             </tr>
 
@@ -448,7 +422,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>updateMovieDto</td>
+                                    <td>movie</td>
                                     <td>
                                                 <code><a href="../classes/UpdateMovieDto.html" target="_self" >UpdateMovieDto</a></code>
                                     </td>
@@ -465,7 +439,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>    <code>unknown</code>
 
                     </div>
                     <div class="io-description">
@@ -488,35 +462,24 @@
   Param,
   Delete,
   UseGuards,
+  ClassSerializerInterceptor,
+  UseInterceptors,
+  Req,
 } from &#x27;@nestjs/common&#x27;;
-import { MovieService } from &#x27;./movie.service&#x27;;
+import { MovieService } from &#x27;./services/movie.service&#x27;;
 import { CreateMovieDto } from &#x27;./dto/create-movie.dto&#x27;;
 import { UpdateMovieDto } from &#x27;./dto/update-movie.dto&#x27;;
 import JwtAuthenticationGuard from &#x27;../authentication/guards/jwt-authentication.guard&#x27;;
-impot { Movie } from &#x27;./entities/movie.entity&#x27;;
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiParam,
-  ApiTags,
-} from &#x27;@nestjs/swagger&#x27;;
+import { Movie } from &#x27;./movie.entity&#x27;;
+import { ApiParam, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import RequestWithUser from &#x27;src/authentication/interface/requestWithUser.interface&#x27;;
 
 @Controller(&#x27;movie&#x27;)
 @ApiTags(&#x27;movies&#x27;)
+@UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(JwtAuthenticationGuard)
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
-
-  @Post()
-  @UseGuards(JwtAuthenticationGuard)
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.movieService.createMovie(createMovieDto);
-  }
-
-  @Get()
-  @UseGuards(JwtAuthenticationGuard)
-  findAll() {
-    return this.movieService.getAllMovies();
-  }
 
   @Get(&#x27;:id&#x27;)
   @ApiParam({
@@ -525,27 +488,37 @@ export class MovieController {
     description: &#x27;Should be an id of a post that exists in the database&#x27;,
     type: Number,
   })
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
+  @ApiResponse({
+    status: 200,
+    description: &#x27;A post has been successfully fetched&#x27;,
+    type: Movie,
+  })
+  @ApiResponse({
+    status: 404,
+    description: &#x27;A post with given id does not exist.&#x27;,
+  })
   @UseGuards(JwtAuthenticationGuard)
-  findOne(@Param(&#x27;id&#x27;) id: string): Promise&lt;Movie&gt; {
-    return this.movieService.getMovieById(+id);
+  getMovieById(@Param(&#x27;id&#x27;) id: string): Promise&lt;Movie&gt; {
+    const movieId &#x3D; Number(id);
+    return this.movieService.getMovie(movieId);
+  }
+
+  @Post()
+  @UseGuards(JwtAuthenticationGuard)
+  async createMovie(@Body() post: CreateMovieDto, @Req() req: RequestWithUser) {
+    return this.movieService.createMovie(post, req.user);
   }
 
   @Patch(&#x27;:id&#x27;)
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
-  update(@Param(&#x27;id&#x27;) id: string, @Body() updateMovieDto: UpdateMovieDto) {
-    return this.movieService.update(+id, updateMovieDto);
+  async updateMovie(@Param(&#x27;id&#x27;) id: string, @Body() movie: UpdateMovieDto) {
+    return this.movieService.updateMovie(Number(id), movie);
   }
 
   @Delete(&#x27;:id&#x27;)
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
-  remove(@Param(&#x27;id&#x27;) id: string) {
-    return this.movieService.remove(+id);
+  async deleteMovie(@Param(&#x27;id&#x27;) id: string) {
+    return this.movieService.deleteMovie(Number(id));
   }
 }
 </code></pre>
