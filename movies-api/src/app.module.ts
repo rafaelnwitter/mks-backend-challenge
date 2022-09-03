@@ -1,11 +1,10 @@
 import * as Joi from '@hapi/joi';
-import * as redisStore from 'cache-manager-redis-store';
-import { CacheModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './movie/movie.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [

@@ -18,9 +18,11 @@ import { ApiBody } from '@nestjs/swagger';
 import LogInDto from './dto/login.dto';
 import { UsersService } from '../users/users.service';
 import JwtRefreshGuard from './guards/jwt-refresh.guard';
+import { HttpCacheInterceptor } from './httpCache.interceptor';
 
 @Controller('authentication')
 @UseInterceptors(ClassSerializerInterceptor)
+@UseInterceptors(HttpCacheInterceptor)
 export class AuthenticationController {
   /**
    * @ignore

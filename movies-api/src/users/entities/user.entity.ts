@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Movie } from '../../movie/movie.entity';
 
 @Entity()
-export default class User {
+export class User {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -22,4 +23,8 @@ export default class User {
   @Column({ nullable: true })
   @Exclude()
   public currentHashedRefreshToken?: string;
+
+  @Column({ nullable: true })
+  @OneToMany(() => Movie, (movie: Movie) => movie.publisher)
+  public movies?: Movie[];
 }

@@ -7,35 +7,24 @@ import {
   Param,
   Delete,
   UseGuards,
+  ClassSerializerInterceptor,
+  UseInterceptors,
+  Req,
 } from '@nestjs/common';
-import { MovieService } from './movie.service';
+import { MovieService } from './services/movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import JwtAuthenticationGuard from '../authentication/guards/jwt-authentication.guard';
-import Movie from './entities/movie.entity';
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiParam,
-  ApiTags,
-} from '@nestjs/swagger';
+import { Movie } from './movie.entity';
+import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import RequestWithUser from 'src/authentication/interface/requestWithUser.interface';
 
 @Controller('movie')
 @ApiTags('movies')
+@UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(JwtAuthenticationGuard)
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
-
-  @Post()
-  @UseGuards(JwtAuthenticationGuard)
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.movieService.createMovie(createMovieDto);
-  }
-
-  @Get()
-  @UseGuards(JwtAuthenticationGuard)
-  findAll() {
-    return this.movieService.getAllMovies();
-  }
 
   @Get(':id')
   @ApiParam({
@@ -44,26 +33,36 @@ export class MovieController {
     description: 'Should be an id of a post that exists in the database',
     type: Number,
   })
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'A post has been successfully fetched',
+    type: Movie,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'A post with given id does not exist.',
+  })
   @UseGuards(JwtAuthenticationGuard)
-  findOne(@Param('id') id: string): Promise<Movie> {
-    return this.movieService.getMovieById(+id);
+  getMovieById(@Param('id') id: string): Promise<Movie> {
+    const movieId = Number(id);
+    return this.movieService.getMovie(movieId);
+  }
+
+  @Post()
+  @UseGuards(JwtAuthenticationGuard)
+  async createMovie(@Body() post: CreateMovieDto, @Req() req: RequestWithUser) {
+    return this.movieService.createMovie(post, req.user);
   }
 
   @Patch(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
-  update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
-    return this.movieService.update(+id, updateMovieDto);
+  async updateMovie(@Param('id') id: string, @Body() movie: UpdateMovieDto) {
+    return this.movieService.updateMovie(Number(id), movie);
   }
 
   @Delete(':id')
-  @ApiOkResponse()
-  @ApiNotFoundResponse()
   @UseGuards(JwtAuthenticationGuard)
-  remove(@Param('id') id: string) {
-    return this.movieService.remove(+id);
+  async deleteMovie(@Param('id') id: string) {
+    return this.movieService.deleteMovie(Number(id));
   }
 }
