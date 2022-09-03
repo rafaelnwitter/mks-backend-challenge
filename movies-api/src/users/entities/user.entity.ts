@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { Movie } from '../../movie/movie.entity';
+import { Movie } from '../../movie/entities/movie.entity';
 
 @Entity()
 export class User {
@@ -24,7 +24,6 @@ export class User {
   @Exclude()
   public currentHashedRefreshToken?: string;
 
-  @Column({ nullable: true })
-  @OneToMany(() => Movie, (movie: Movie) => movie.publisher)
+  @OneToMany(() => Movie, (movie: Movie) => movie.publisher, { eager: true })
   public movies?: Movie[];
 }

@@ -6,7 +6,7 @@ import {
   ManyToOne,
   RelationId,
 } from 'typeorm';
-import { User } from '../users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Movie {
@@ -19,8 +19,10 @@ export class Movie {
   @Column()
   gender: string;
 
-  @Index('post_authorId_index')
-  @ManyToOne(() => User, (publisher: User) => publisher.movies)
+  @Index('movie_publisherId_index')
+  @ManyToOne(() => User, (publisher: User) => publisher.movies, {
+    eager: false,
+  })
   publisher: User;
 
   @RelationId((movie: Movie) => movie.publisher)

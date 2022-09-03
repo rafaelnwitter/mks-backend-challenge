@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "documentation:serve": "npx @compodoc/compodoc -p tsconfig.json --serve",
     "start": "nest start",
     "start:dev": "nest start --watch",

@@ -15,7 +15,7 @@ import { MovieService } from './services/movie.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import JwtAuthenticationGuard from '../authentication/guards/jwt-authentication.guard';
-import { Movie } from './movie.entity';
+import { Movie } from './entities/movie.entity';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import RequestWithUser from 'src/authentication/interface/requestWithUser.interface';
 

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMovieDto } from '../dto/create-movie.dto';
 import { UpdateMovieDto } from '../dto/update-movie.dto';
-import { Movie } from '../movie.entity';
+import { Movie } from '../entities/movie.entity';
 import { User } from 'src/users/entities/user.entity';
 import MovieNotFoundException from '../exceptions/movieNotFound.exception';
 import { options } from '@hapi/joi';
