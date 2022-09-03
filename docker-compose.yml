@@ -10,15 +10,6 @@ services:
     container_name: backend-api
     links:
       - redis
-    environment:
-      NODE_ENV: production
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: movies
-      REDIS_HOST: cache
-      REDIS_PORT: 6379
     depends_on: 
       - postgres
       - redis
@@ -38,6 +29,15 @@ services:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
 
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+        - redis
+
   postgres:
     container_name: postgres
     image: postgres:latest
@@ -56,17 +56,15 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4
     ports:
-    - "80:80"
+    - "8080:80"
     volumes:
-    - /data/pgadmin:/postgres/.pgadmin
+    - /data/pgadmin:/root/.pgadmin
     env_file:
     - docker.env
     networks:
     - postgres
 
 volumes:
-  db:
-    driver: local
   redis:
     driver: local
 

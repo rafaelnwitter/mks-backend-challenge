@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 @Entity()
-class User {
+export default class User {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -23,5 +23,3 @@ class User {
   @Exclude()
   public currentHashedRefreshToken?: string;
 }
-
-export default User;
