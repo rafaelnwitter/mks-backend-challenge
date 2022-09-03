@@ -75,7 +75,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
- 
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -88,12 +88,10 @@ import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
         username: configService.get(&#x27;POSTGRES_USER&#x27;),
         password: configService.get(&#x27;POSTGRES_PASSWORD&#x27;),
         database: configService.get(&#x27;POSTGRES_DB&#x27;),
-        entities: [
-          __dirname + &#x27;/../**/*.entity.ts&#x27;,
-        ],
+        entities: [__dirname + &#x27;/../**/*.entity.ts&#x27;],
         synchronize: true,
         autoLoadEntities: true,
-      })
+      }),
     }),
   ],
 })

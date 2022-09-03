@@ -347,7 +347,7 @@
 import { Exclude } from &#x27;class-transformer&#x27;;
 
 @Entity()
-class User {
+export default class User {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -368,8 +368,6 @@ class User {
   @Exclude()
   public currentHashedRefreshToken?: string;
 }
-
-export default User;
 </code></pre>
     </div>
 </div>

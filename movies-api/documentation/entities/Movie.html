@@ -260,7 +260,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Column, Entity, PrimaryGeneratedColumn } from &#x27;typeorm&#x27;;
 
 @Entity()
-class Movie {
+export default class Movie {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -273,8 +273,6 @@ class Movie {
   @Column()
   public director: string;
 }
-
-export default Movie;
 </code></pre>
     </div>
 </div>

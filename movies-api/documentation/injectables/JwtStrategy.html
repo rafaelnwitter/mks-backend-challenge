@@ -182,8 +182,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/authentication/strategy/jwt.strategy.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/authentication/strategy/jwt.strategy.ts:25</a></div>
                 </td>
             </tr>
 
@@ -244,7 +244,7 @@ import { ConfigService } from &#x27;@nestjs/config&#x27;;
 import { Request } from &#x27;express&#x27;;
 import { UsersService } from &#x27;../../users/users.service&#x27;;
 import { TokenPayload } from &#x27;../interface/tokenPayload.interface&#x27;;
- 
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
@@ -252,17 +252,20 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly userService: UsersService,
   ) {
     super({
-      jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) &#x3D;&gt; {
-        return request?.cookies?.Authentication;
-      }]),
-      secretOrKey: configService.get(&#x27;JWT_SECRET&#x27;)
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        (request: Request) &#x3D;&gt; {
+          return request?.cookies?.Authentication;
+        },
+      ]),
+      secretOrKey: configService.get(&#x27;JWT_SECRET&#x27;),
     });
   }
- 
+
   async validate(payload: TokenPayload) {
     return this.userService.getById(payload.userId);
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>

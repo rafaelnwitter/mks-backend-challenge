@@ -145,8 +145,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:71</a></div>
                 </td>
             </tr>
 
@@ -223,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:56</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:52</a></div>
                 </td>
             </tr>
 
@@ -262,7 +262,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>unknown</code>
+                        <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -301,8 +301,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:80</a></div>
                 </td>
             </tr>
 
@@ -377,8 +377,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:40</a></div>
                 </td>
             </tr>
 
@@ -455,8 +455,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:34</a></div>
                 </td>
             </tr>
 
@@ -517,8 +517,6 @@
   Post,
   UseGuards,
   Get,
-  CACHE_MANAGER,
-  Inject,
   UseInterceptors,
 } from &#x27;@nestjs/common&#x27;;
 import { AuthenticationService } from &#x27;./authentication.service&#x27;;
@@ -529,7 +527,6 @@ import JwtAuthenticationGuard from &#x27;./guards/jwt-authentication.guard&#x27;
 import { ApiBody } from &#x27;@nestjs/swagger&#x27;;
 import LogInDto from &#x27;./dto/login.dto&#x27;;
 import { UsersService } from &#x27;../users/users.service&#x27;;
-import Cache from &#x27;cache-manager-redis-store&#x27;;
 import JwtRefreshGuard from &#x27;./guards/jwt-refresh.guard&#x27;;
 
 @Controller(&#x27;authentication&#x27;)
@@ -541,7 +538,6 @@ export class AuthenticationController {
   constructor(
     private readonly authenticationService: AuthenticationService,
     private readonly usersService: UsersService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   @Post(&#x27;register&#x27;)
@@ -563,7 +559,7 @@ export class AuthenticationController {
   @UseGuards(LocalAuthenticationGuard)
   @Post(&#x27;log-in&#x27;)
   @ApiBody({ type: LogInDto })
-  async logIn(@Req() request: RequestWithUser) {
+  async logIn(@Req() request: RequestWithUser): Promise&lt;any&gt; {
     const { user } &#x3D; request;
     const accessTokenCookie &#x3D;
       this.authenticationService.getCookieWithJwtAccessToken(user.id);

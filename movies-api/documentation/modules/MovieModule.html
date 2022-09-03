@@ -143,16 +143,30 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as redisStore from &#x27;cache-manager-redis-store&#x27;;
+import { CacheModule, Module } from &#x27;@nestjs/common&#x27;;
 import { MovieService } from &#x27;./movie.service&#x27;;
 import { MovieController } from &#x27;./movie.controller&#x27;;
 import Movie from &#x27;./entities/movie.entity&#x27;;
 import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
+import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Movie])],
+  imports: [
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) &#x3D;&gt; ({
+        store: redisStore,
+        host: configService.get(&#x27;REDIS_HOST&#x27;),
+        port: configService.get(&#x27;REDIS_PORT&#x27;),
+        ttl: 120,
+      }),
+    }),
+    TypeOrmModule.forFeature([Movie]),
+  ],
   controllers: [MovieController],
-  providers: [MovieService]
+  providers: [MovieService],
 })
 export class MovieModule {}
 </code></pre>

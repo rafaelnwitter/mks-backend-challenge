@@ -187,7 +187,7 @@
 import { UsersService } from &#x27;./users.service&#x27;;
 import { CreateUserDto } from &#x27;./dto/create-user.dto&#x27;;
 import { ApiConflictResponse, ApiOkResponse } from &#x27;@nestjs/swagger&#x27;;
-import { LocalAuthenticationGuard } from &#x27;src/authentication/guards/localAuthentication.guard&#x27;;
+import { LocalAuthenticationGuard } from &#x27;../authentication/guards/localAuthentication.guard&#x27;;
 
 @Controller(&#x27;users&#x27;)
 export class UsersController {
@@ -200,26 +200,6 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
-
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
-
-  // @Get(&#x27;:id&#x27;)
-  // findOne(@Param(&#x27;id&#x27;) id: string) {
-  //   return this.usersService.findOne(+id);
-  // }
-
-  // @Patch(&#x27;:id&#x27;)
-  // update(@Param(&#x27;id&#x27;) id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update(+id, updateUserDto);
-  // }
-
-  // @Delete(&#x27;:id&#x27;)
-  // remove(@Param(&#x27;id&#x27;) id: string) {
-  //   return this.usersService.remove(+id);
-  // }
 }
 </code></pre>
     </div>

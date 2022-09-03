@@ -242,12 +242,12 @@ import { PassportStrategy } from &#x27;@nestjs/passport&#x27;;
 import { Injectable } from &#x27;@nestjs/common&#x27;;
 import { AuthenticationService } from &#x27;../authentication.service&#x27;;
 import User from &#x27;../../users/entities/user.entity&#x27;;
- 
+
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authenticationService: AuthenticationService) {
     super({
-      usernameField: &#x27;email&#x27;
+      usernameField: &#x27;email&#x27;,
     });
   }
   async validate(email: string, password: string): Promise&lt;User&gt; {
