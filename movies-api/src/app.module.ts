@@ -4,10 +4,16 @@ import { MovieModule } from './movie/movie.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { Module } from '@nestjs/common';
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
+    CacheModule.registerAsync({
+      useFactory: () => ({
+        ttl: 60,
+      }),
+    }),
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         REDIS_HOST: Joi.string().required(),
@@ -28,6 +34,11 @@ import { Module } from '@nestjs/common';
     AuthenticationModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
+  ],
 })
 export class AppModule {}

@@ -8,6 +8,7 @@ import {
   UseGuards,
   Get,
   UseInterceptors,
+  CacheInterceptor,
 } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
 import RegisterDto from './dto/register.dto';
@@ -18,11 +19,9 @@ import { ApiBody } from '@nestjs/swagger';
 import LogInDto from './dto/login.dto';
 import { UsersService } from '../users/users.service';
 import JwtRefreshGuard from './guards/jwt-refresh.guard';
-import { HttpCacheInterceptor } from './httpCache.interceptor';
 
 @Controller('authentication')
-@UseInterceptors(ClassSerializerInterceptor)
-@UseInterceptors(HttpCacheInterceptor)
+@UseInterceptors(CacheInterceptor)
 export class AuthenticationController {
   /**
    * @ignore
