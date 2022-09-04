@@ -1,7 +1,5 @@
 FROM node:16.17.0-alpine
 
-USER ROOT
-
 # Docker working directory
 WORKDIR /app
 
